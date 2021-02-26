@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="LOGS" value="./logs" />
+
+	<appender name="ACCOUNT-MS-APPENDER"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOGS}/account-ms.log</file>
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+		</encoder>
+
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOGS}/archived/account-ms-%d{yyyy-MM-dd-HH}.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+	</appender>
+
+	<!-- LOG everything at INFO level -->
+	<root level="info">
+		<appender-ref ref="ACCOUNT-MS-APPENDER" />
+	</root>
+</configuration>
