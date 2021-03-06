@@ -1,10 +1,12 @@
 package com.reloadly.exception;
 
+import java.util.function.Supplier;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Account not found")
-public class AccountNotFoundException extends RuntimeException {
+public class AccountNotFoundException extends RuntimeException implements Supplier<AccountNotFoundException> {
 	/**
 	 * 
 	 */
@@ -13,4 +15,9 @@ public class AccountNotFoundException extends RuntimeException {
 	public AccountNotFoundException(Long id) {
 	    super(String.format("Account [%s] not found.", id));
 	}
+	
+	@Override
+    public AccountNotFoundException get() {
+        return this;
+    }
 }
